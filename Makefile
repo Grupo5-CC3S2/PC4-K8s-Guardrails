@@ -9,7 +9,7 @@ export HOME := /c/Users/User
 help: ## Muestra este mensaje de ayuda
 	@bash -c "grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = \":.*?## \"}; {printf \"\033[36m%-30s\033[0m %s\n\", $$1, $$2}'"
 
-k8s-apply: ## Aplica todos los recursos de Kubernetes (con metricas de tiempo)
+k8s-apply: scan ## Aplica todos los recursos de Kubernetes (con metricas de tiempo)
 	bash scripts/k8s-apply.sh
 
 k8s-clean: ## Elimina todos los recursos del cluster

@@ -17,7 +17,4 @@ Una vez implementadas las acciones de seguridad (en makefile o actions) se debe 
 
 - Evidencias generadas:  
   - SBOM (Software Bill of Materials)  
-  - Scan de vulnerabilidades (Trivy u otro)  
   - Reporte del checker (`policy-checker/report.json`)  
-- No quedan vulnerabilidades **HIGH** sin justificar. 
-- El pipeline asociado pasa en verde
