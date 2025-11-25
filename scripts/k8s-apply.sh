@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Configurar el contexto de minikube
+# Configurar contexto de minikube
 export KUBECONFIG=~/.kube/config
 kubectl config use-context minikube > /dev/null 2>&1 || true
 
-# Cargar variables del .env si existe
+# Cargar variables del archivo .env
 if [ -f .env ]; then
     echo "Cargando variables de .env"
     set -a
@@ -27,6 +27,9 @@ envsubst < k8s/secret.yaml | kubectl apply -f - && echo "Secret aplicado" || { e
 
 echo "Aplicando Deployment"
 kubectl apply -f k8s/deployment.yaml && echo "Deployment aplicado" || { echo "Error aplicando Deployment"; exit 1; }
+
+echo "Aplicando NetworkPolicy"
+kubectl apply -f k8s/networkpolicy.yaml && echo "NetworkPolicy aplicada" || { echo "Error aplicando NetworkPolicy"; exit 1; }
 
 echo "Aplicando Service"
 kubectl apply -f k8s/service.yaml && echo "Service aplicado" || { echo "Error aplicando Service"; exit 1; }
