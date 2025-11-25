@@ -13,11 +13,22 @@ spec:
       labels:
         app: python-app
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 2000
+  
       containers:
         - name: python-app
           image: scptx0/python-app:1.1
           ports:
             - containerPort: 5000
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
 
           resources:
             requests:
