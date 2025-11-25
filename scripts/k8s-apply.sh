@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Start timing
+START_TIME=$(date +%s)
+
 # Configurar contexto de minikube
 export KUBECONFIG=~/.kube/config
 kubectl config use-context minikube > /dev/null 2>&1 || true
@@ -34,5 +37,17 @@ kubectl apply -f k8s/networkpolicy.yaml && echo "NetworkPolicy aplicada" || { ec
 echo "Aplicando Service"
 kubectl apply -f k8s/service.yaml && echo "Service aplicado" || { echo "Error aplicando Service"; exit 1; }
 
-echo ""
+# Calcular tiempo de despliegue
+END_TIME=$(date +%s)
+DEPLOY_DURATION=$((END_TIME - START_TIME))
+
 echo "Todos los recursos aplicados correctamente"
+echo "Tiempo de despliegue: ${DEPLOY_DURATION} segundos"
+
+cat >> metrics-deploy.txt <<EOF
+[$(date -u +%Y-%m-%d/%H:%M:%S)]
+    Tiempo de despliegue: $DEPLOY_DURATION segundos
+    
+EOF
+
+echo "Metricas en metrics-deploy.txt"
