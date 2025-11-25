@@ -11,7 +11,7 @@ if kubectl run hacker-pod --rm -i --restart=Never --image=curlimages/curl -n sec
     echo "(Probablemente falta un plugin CNI como Calico en Minikube)"
     exit 1
 else
-    # Si fallo, asumimos que fue bloqueado
+    # Si fallo, asumimos que fue bloqueado (conexion rechazada o timeout)
     echo "EXITO: El hacker pod fue bloqueado (conexion rechazada o timeout)."
     exit 0
 fi

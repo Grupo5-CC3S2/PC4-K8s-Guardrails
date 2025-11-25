@@ -21,5 +21,5 @@ k8s-url: ## Obtiene la URL externa del servicio (Minikube)
 k8s-policy-check: ## Ejecuta validacion de politicas sobre manifiestos
 	bash scripts/run-policy-checks.sh
 
-k8s-test-netpol: ## Verifica que la NetworkPolicy bloquee trafico no autorizado
+k8s-test-netpol: ## Verifica que la NetworkPolicy bloquee trafico no autorizado (conexion rechazada o timeout)
 	bash scripts/k8s-test-netpol.sh
