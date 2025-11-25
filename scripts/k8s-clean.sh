@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Configurar el contexto de minikube
+# Configurar contexto de minikube
 export KUBECONFIG=~/.kube/config
 kubectl config use-context minikube > /dev/null 2>&1 || true
 
